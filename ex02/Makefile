@@ -6,7 +6,7 @@
 #    By: miyuu <miyuu@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/31 18:25:47 by miyuu             #+#    #+#              #
-#    Updated: 2025/06/18 20:20:21 by miyuu            ###   ########.fr        #
+#    Updated: 2025/06/19 11:52:33 by miyuu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,23 +23,28 @@ HEADERS = \
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-OBJS = $(SRCS:.cpp=.o)
+OBJ_DIR = bin
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) -r $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
+# ========== File Dependency ========== #
+
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-# ========== File Dependency ========== #
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
-$(OBJS): $(HEADERS)
+$(OBJ_DIR)/%.o: %.cpp $(HEADERS) | $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
