@@ -6,21 +6,23 @@
 ClapTrap::ClapTrap()
 	: hit_points_(10), energy_points_(10), attack_damage_(0) {
 		std::cout << "ClapTrap " << name_ << " デフォルトコンストラクタが呼ばれました" << std::endl;
-	}
+}
 
 /*
- * デフォルトコンストラクタ
+ * コンストラクタ
  */
 ClapTrap::ClapTrap(std::string name)
 	: name_(name), hit_points_(10), energy_points_(10), attack_damage_(0) {
 		std::cout << "ClapTrap " << name_ << " コンストラクタが呼ばれました" << std::endl;
-	}
+}
 
 /*
  * コピーコンストラクタ
  */
 ClapTrap::ClapTrap(const ClapTrap& c)
-	: name_(c.name_), hit_points_(c.hit_points_), energy_points_(c.energy_points_), attack_damage_(c.attack_damage_) {}
+	: name_(c.name_), hit_points_(c.hit_points_), energy_points_(c.energy_points_), attack_damage_(c.attack_damage_) {
+	std::cout << "ClapTrap " << name_ << " コピーコンストラクタが呼ばれました" << std::endl;
+}
 
 /*
  * コピー代入演算子 (A copy assignment operator overload.)
@@ -33,6 +35,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap& c) {
 		this->energy_points_ = c.energy_points_;
 		this->attack_damage_ = c.attack_damage_;
 	}
+	std::cout << "ClapTrap " << name_ << " コピー代入演算子が呼ばれました" << std::endl;
 	return (*this);
 }
 
